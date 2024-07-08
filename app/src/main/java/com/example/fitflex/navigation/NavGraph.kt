@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.fitflex.presentation.home.HomeScreen
 import com.example.fitflex.presentation.onBoarding.OnBoardingScreen
 
 @Composable
@@ -16,10 +17,10 @@ fun SetupNavGraph(
         startDestination = startDestination
     ) {
         composable(route = Screen.Welcome.route) {
-            OnBoardingScreen()
+            OnBoardingScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
-
+            HomeScreen()
         }
     }
 }

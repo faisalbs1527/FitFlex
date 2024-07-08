@@ -12,8 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.fitflex.components.CustomButton
 import com.example.fitflex.components.PagerScreen
+import com.example.fitflex.navigation.Screen
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.utils.OnBoardingPage
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -22,13 +24,13 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 
 @Composable
-fun OnBoardingScreen() {
-    OnBoardingScreenSkeleton()
+fun OnBoardingScreen(navController: NavController) {
+    OnBoardingScreenSkeleton(navController)
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun OnBoardingScreenSkeleton() {
+fun OnBoardingScreenSkeleton(navController: NavController) {
 
     val pages = listOf(
         OnBoardingPage.First,
@@ -48,7 +50,8 @@ fun OnBoardingScreenSkeleton() {
             PagerScreen(onBoardingPage = pages[position])
         }
         HorizontalPagerIndicator(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
                 .weight(1f),
             pagerState = pagerState
         )
@@ -57,7 +60,10 @@ fun OnBoardingScreenSkeleton() {
             horizontalArrangement = Arrangement.Center
         ) {
             CustomButton(
-                onClick = { /*TODO*/ },
+                onClick = {
+                    navController.popBackStack()
+                    navController.navigate(Screen.Home.route)
+                },
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .weight(1f)
@@ -72,6 +78,6 @@ fun OnBoardingScreenSkeleton() {
 @Composable
 private fun ShowOnBoardingScreenSkeleton() {
     FitFlexTheme {
-        OnBoardingScreenSkeleton()
+//        OnBoardingScreenSkeleton()
     }
 }
