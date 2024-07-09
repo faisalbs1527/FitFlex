@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -18,10 +20,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fitflex.components.WorkoutCardItem
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black80
+import com.example.fitflex.utils.WorkoutCard
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
@@ -31,6 +35,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenSkeleton() {
+
+    val cardList = listOf(
+        WorkoutCard.First,
+        WorkoutCard.Second,
+        WorkoutCard.Third,
+        WorkoutCard.Fourth
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,6 +98,11 @@ fun HomeScreenSkeleton() {
             fontFamily = Font_LatoBold,
             modifier = Modifier.padding(top = 24.dp)
         )
+        LazyRow(modifier = Modifier.padding(top = 16.dp)) {
+            items(cardList) { item ->
+                WorkoutCardItem(workoutCard = item)
+            }
+        }
     }
 }
 

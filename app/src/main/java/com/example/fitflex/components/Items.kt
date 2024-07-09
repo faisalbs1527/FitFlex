@@ -40,25 +40,23 @@ import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.lightGreen
 import com.example.fitflex.ui.theme.transparentColor
+import com.example.fitflex.utils.WorkoutCard
 
 @Composable
 fun WorkoutCardItem(
-    imagePainter: Painter,
-    title: String,
-    energyLoss: String,
-    workoutTime: String
+    workoutCard: WorkoutCard
 ) {
     Card(
         modifier = Modifier
             .height(174.dp)
             .width(280.dp)
-            .padding(8.dp),
+            .padding(end = 16.dp),
         shape = RoundedCornerShape(23.dp)
     ) {
 
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
-                painter = imagePainter,
+                painter = painterResource(id = workoutCard.image),
                 contentDescription = "Background Image",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds
@@ -90,7 +88,7 @@ fun WorkoutCardItem(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Text(
-                        text = title,
+                        text = workoutCard.title,
                         fontSize = 18.sp,
                         fontWeight = FontWeight(700),
                         fontFamily = Font_LatoBold,
@@ -99,12 +97,12 @@ fun WorkoutCardItem(
                     CardItem(
                         itemWidth = 80,
                         iconPainter = painterResource(id = R.drawable.powericon),
-                        itemText = energyLoss
+                        itemText = workoutCard.energyLoss
                     )
                     CardItem(
                         itemWidth = 72,
                         iconPainter = painterResource(id = R.drawable.timericon),
-                        itemText = workoutTime
+                        itemText = workoutCard.workoutTime
                     )
                 }
 
@@ -174,10 +172,7 @@ fun CardItem(
 private fun ShowItems() {
     FitFlexTheme {
         WorkoutCardItem(
-            imagePainter = painterResource(id = R.drawable.lowerboady),
-            title = "Lower Body Training",
-            energyLoss = "500 Kcal",
-            workoutTime = "50 Min"
+           workoutCard = WorkoutCard.First
         )
     }
 }
