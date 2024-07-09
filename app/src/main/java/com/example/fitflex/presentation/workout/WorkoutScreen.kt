@@ -17,7 +17,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material3.Card
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fitflex.R
+import com.example.fitflex.components.CustomButton
 import com.example.fitflex.components.DetailsBox
 import com.example.fitflex.components.RoundsItem
 import com.example.fitflex.ui.theme.FitFlexTheme
@@ -44,128 +47,136 @@ fun WorkoutScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun WorkoutScreenSkeleton() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = black)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 30.dp, start = 20.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.ArrowBackIos, contentDescription = "Back Icon",
-                tint = Color.White,
-                modifier = Modifier.size(20.dp)
-            )
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Workout",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(500),
-                    color = Color.White,
-                    modifier = Modifier.padding(end = 24.dp)
-                )
-            }
+    Scaffold(
+        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButton = {
+            CustomButton(onClick = { /*TODO*/ }, text = "Lets Workout")
         }
-        Box(modifier = Modifier.fillMaxWidth()) {
-            Card(
-                modifier = Modifier
-                    .height(250.dp)
-                    .fillMaxWidth()
-                    .padding(start = 20.dp, end = 16.dp, top = 20.dp),
-                shape = RoundedCornerShape(23.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.upperbody),
-                    contentDescription = "Background Image",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(color = black)
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 64.dp, end = 64.dp, top = 220.dp)
-                    .background(
-                        color = Color.Black.copy(alpha = .4f),
-                        shape = RoundedCornerShape(8.dp)
+                    .padding(top = 30.dp, start = 20.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBackIos, contentDescription = "Back Icon",
+                    tint = Color.White,
+                    modifier = Modifier.size(20.dp)
+                )
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Workout",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(500),
+                        color = Color.White,
+                        modifier = Modifier.padding(end = 24.dp)
                     )
-                    .padding(vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                DetailsBox(image = R.drawable.timericon, title = "Time", text = "20 min")
-                Box(
-                    modifier = Modifier
-                        .width(1.dp)
-                        .height(24.dp)
-                        .background(color = Color.White.copy(alpha = .7f))
-                )
-                DetailsBox(image = R.drawable.powericon, title = "Burn", text = "95 kcal")
+                }
             }
-        }
-        Text(
-            text = "Lower Body Training",
-            fontSize = 24.sp,
-            fontWeight = FontWeight(800),
-            fontFamily = Font_LatoBold,
-            color = Color.White,
-            modifier = Modifier.padding(start = 20.dp, top = 8.dp)
-        )
-        Text(
-            text = "The lower abdomen and hips are the most difficult areas of the body to reduce when we are on a diet. Even so, in this area, especially the legs as a whole, you can reduce weight even if you don't use tools.",
-            fontSize = 15.sp,
-            fontWeight = FontWeight(400),
-            fontFamily = Font_Lato,
-            color = Color.White.copy(alpha = .5f),
-            modifier = Modifier.padding(start = 20.dp, end = 16.dp, top = 8.dp)
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 20.dp, end = 16.dp, top = 32.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Card(
+                    modifier = Modifier
+                        .height(250.dp)
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 16.dp, top = 20.dp),
+                    shape = RoundedCornerShape(23.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.upperbody),
+                        contentDescription = "Background Image",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.FillBounds
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 64.dp, end = 64.dp, top = 220.dp)
+                        .background(
+                            color = Color.Black.copy(alpha = .4f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    DetailsBox(image = R.drawable.timericon, title = "Time", text = "20 min")
+                    Box(
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(24.dp)
+                            .background(color = Color.White.copy(alpha = .7f))
+                    )
+                    DetailsBox(image = R.drawable.powericon, title = "Burn", text = "95 kcal")
+                }
+            }
             Text(
-                text = "Rounds",
-                fontSize = 20.sp,
-                fontWeight = FontWeight(700),
+                text = "Lower Body Training",
+                fontSize = 24.sp,
+                fontWeight = FontWeight(800),
                 fontFamily = Font_LatoBold,
-                color = Color.White
+                color = Color.White,
+                modifier = Modifier.padding(start = 20.dp, top = 8.dp)
+            )
+            Text(
+                text = "The lower abdomen and hips are the most difficult areas of the body to reduce when we are on a diet. Even so, in this area, especially the legs as a whole, you can reduce weight even if you don't use tools.",
+                fontSize = 15.sp,
+                fontWeight = FontWeight(400),
+                fontFamily = Font_Lato,
+                color = Color.White.copy(alpha = .5f),
+                modifier = Modifier.padding(start = 20.dp, end = 16.dp, top = 8.dp)
             )
             Row(
-                verticalAlignment = Alignment.Bottom
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 16.dp, top = 32.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "1",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight(500),
-                    fontFamily = Font_Lato,
+                    text = "Rounds",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight(700),
+                    fontFamily = Font_LatoBold,
                     color = Color.White
                 )
-                Text(
-                    text = "/8",
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight(500),
-                    fontFamily = Font_Lato,
-                    color = Color.White
-                )
+                Row(
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    Text(
+                        text = "1",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(500),
+                        fontFamily = Font_Lato,
+                        color = Color.White
+                    )
+                    Text(
+                        text = "/8",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500),
+                        fontFamily = Font_Lato,
+                        color = Color.White
+                    )
+                }
             }
-        }
-        LazyColumn(
-            modifier = Modifier.padding(start = 20.dp, end = 16.dp, top = 8.dp)
-        ) {
-            items(8) {
-                RoundsItem()
+            LazyColumn(
+                modifier = Modifier.padding(start = 20.dp, end = 16.dp, top = 8.dp)
+            ) {
+                items(8) {
+                    RoundsItem()
+                }
             }
-        }
 
+        }
     }
 }
 

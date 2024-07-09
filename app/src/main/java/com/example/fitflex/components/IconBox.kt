@@ -1,9 +1,12 @@
 package com.example.fitflex.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -80,31 +83,36 @@ fun IconBox(
     }
 }
 
-//@Composable
-//fun CustomButton(
-//    onClick: () -> Unit,
-//    modifier: Modifier = Modifier,
-//    text : String
-//) {
-//    Card(
-//        modifier = modifier.clickable {
-//            onClick()
-//        },
-//        colors = CardDefaults.cardColors(containerColor = green80)
-//    ) {
-//        Column(
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            Text(text = text,
-//                fontSize = 17.sp,
-//                color = Color.White,
-//                fontWeight = FontWeight(500)
-//            )
-//        }
-//    }
-//}
+@Composable
+fun CustomButton(
+    onClick: () -> Unit,
+    text: String
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 20.dp, end = 16.dp, bottom = 8.dp)
+            .height(56.dp)
+            .clickable {
+                onClick()
+            },
+        colors = CardDefaults.cardColors(containerColor = lightGreen),
+        shape = RoundedCornerShape(32.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = text,
+                fontSize = 17.sp,
+                color = black,
+                fontWeight = FontWeight(500)
+            )
+        }
+    }
+}
 
 @Preview
 @Composable
@@ -122,9 +130,7 @@ private fun ShowDetailsBox() {
 @Composable
 private fun ViewIconBox() {
     FitFlexTheme {
-        IconBox(
-            iconPainter = painterResource(id = R.drawable.timericon)
-        )
+        CustomButton(onClick = { /*TODO*/ }, text = "Lets Workout")
 
     }
 }
