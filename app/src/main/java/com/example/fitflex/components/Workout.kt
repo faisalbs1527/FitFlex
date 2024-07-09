@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,10 +20,12 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -41,6 +44,7 @@ import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.lightGreen
 import com.example.fitflex.ui.theme.transparentColor
 import com.example.fitflex.utils.WorkoutCard
+import com.example.fitflex.utils.WorkoutToday
 
 @Composable
 fun WorkoutCardItem(
@@ -167,12 +171,90 @@ fun CardItem(
     }
 }
 
+@Composable
+fun PlanCard(
+    workoutToday: WorkoutToday
+) {
+    Card(
+        modifier = Modifier
+            .padding(end = 16.dp, top = 8.dp, bottom = 8.dp)
+            .height(120.dp)
+            .width(350.dp),
+        shape = RoundedCornerShape(23.dp),
+        colors = CardDefaults.cardColors(Color.White),
+        elevation = CardDefaults.cardElevation(1.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Card(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .size(100.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = workoutToday.image), contentDescription = "",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 16.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Box(
+                        modifier = Modifier.background(
+                            color = black,
+                            shape = RoundedCornerShape(bottomStart = 6.dp, bottomEnd = 6.dp)
+                        )
+                    ) {
+                        Text(
+                            text = workoutToday.status,
+                            color = Color.White,
+                            fontWeight = FontWeight(400),
+                            fontSize = 10.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                        )
+                    }
+                }
+                Column(
+                    modifier = Modifier.fillMaxHeight(),
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Text(
+                        text = workoutToday.title,
+                        color = black,
+                        fontWeight = FontWeight(500),
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                    Text(
+                        text = workoutToday.amount,
+                        color = Color.Black.copy(alpha = .5f),
+                        fontWeight = FontWeight(400),
+                        fontSize = 13.sp,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                    RoundedProgressBar(progress = workoutToday.progress)
+                }
+            }
+        }
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 private fun ShowItems() {
     FitFlexTheme {
         WorkoutCardItem(
-           workoutCard = WorkoutCard.First
+            workoutCard = WorkoutCard.First
         )
     }
 }
@@ -185,6 +267,40 @@ private fun ShowCardItem() {
             itemWidth = 80,
             iconPainter = painterResource(id = R.drawable.powericon),
             itemText = "500 Kcal"
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ShowPlanCard() {
+    FitFlexTheme {
+        PlanCard(workoutToday = WorkoutToday.Fourth)
+    }
+}
+
+@Composable
+fun RoundedProgressBar(progress: Float) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        LinearProgressIndicator(
+            progress = progress,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 16.dp)
+                .height(16.dp)
+                .clip(shape = RoundedCornerShape(4.dp)),
+            color = lightGreen,
+            trackColor = Color.LightGray
+        )
+
+        // Display progress percentage at the center of the progress color
+        val percentage = (progress * 100).toInt()
+        Text(
+            text = "$percentage%",
+            color = black,
+            fontSize = 10.sp,
+            fontWeight = FontWeight(500),
+            modifier = Modifier.align(Alignment.Center)
         )
     }
 }
