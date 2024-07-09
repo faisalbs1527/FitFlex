@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.fitflex.presentation.home.HomeScreen
 import com.example.fitflex.presentation.onBoarding.OnBoardingScreen
+import com.example.fitflex.presentation.workout.WorkoutScreen
 
 @Composable
 fun SetupNavGraph(
@@ -20,7 +21,10 @@ fun SetupNavGraph(
             OnBoardingScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController = navController)
+        }
+        composable(route = Screen.Workout.route) {
+            WorkoutScreen()
         }
     }
 }

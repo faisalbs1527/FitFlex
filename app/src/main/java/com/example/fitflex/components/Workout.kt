@@ -2,6 +2,7 @@ package com.example.fitflex.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,13 +49,17 @@ import com.example.fitflex.utils.WorkoutToday
 
 @Composable
 fun WorkoutCardItem(
-    workoutCard: WorkoutCard
+    workoutCard: WorkoutCard,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .height(174.dp)
             .width(280.dp)
-            .padding(end = 16.dp),
+            .padding(end = 16.dp)
+            .clickable {
+                onClick()
+            },
         shape = RoundedCornerShape(23.dp)
     ) {
 
@@ -254,7 +259,8 @@ fun PlanCard(
 private fun ShowItems() {
     FitFlexTheme {
         WorkoutCardItem(
-            workoutCard = WorkoutCard.First
+            workoutCard = WorkoutCard.First,
+            onClick = {}
         )
     }
 }
