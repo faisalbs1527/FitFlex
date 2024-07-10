@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
@@ -39,6 +40,7 @@ import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black
+import com.example.fitflex.utils.RoundsCard
 
 @Composable
 fun WorkoutScreen(modifier: Modifier = Modifier) {
@@ -47,6 +49,18 @@ fun WorkoutScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun WorkoutScreenSkeleton() {
+
+    val roundList = listOf(
+        RoundsCard.First,
+        RoundsCard.Second,
+        RoundsCard.Third,
+        RoundsCard.Fourth,
+        RoundsCard.Fifth,
+        RoundsCard.First,
+        RoundsCard.Second,
+        RoundsCard.Third,
+    )
+    
     Scaffold(
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
@@ -91,7 +105,7 @@ fun WorkoutScreenSkeleton() {
                     shape = RoundedCornerShape(23.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.upperbody),
+                        painter = painterResource(id = R.drawable.lowerboady),
                         contentDescription = "Background Image",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.FillBounds
@@ -171,8 +185,8 @@ fun WorkoutScreenSkeleton() {
             LazyColumn(
                 modifier = Modifier.padding(start = 20.dp, end = 16.dp, top = 8.dp)
             ) {
-                items(8) {
-                    RoundsItem()
+                items(roundList) {item->
+                    RoundsItem(item)
                 }
             }
 

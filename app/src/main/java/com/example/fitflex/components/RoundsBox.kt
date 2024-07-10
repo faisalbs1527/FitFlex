@@ -33,9 +33,12 @@ import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.lightGreen
+import com.example.fitflex.utils.RoundsCard
 
 @Composable
-fun RoundsItem() {
+fun RoundsItem(
+    roundsCard: RoundsCard
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -55,7 +58,7 @@ fun RoundsItem() {
                     .size(58.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.jumpingjack), contentDescription = "",
+                    painter = painterResource(id = roundsCard.image), contentDescription = "",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.FillBounds
                 )
@@ -67,14 +70,14 @@ fun RoundsItem() {
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Text(
-                    text = "Jumping Jacks",
+                    text = roundsCard.title,
                     fontSize = 16.sp,
                     fontWeight = FontWeight(500),
                     fontFamily = Font_Lato,
                     color = Color.White
                 )
                 Text(
-                    text = "00:30",
+                    text = roundsCard.time,
                     fontSize = 13.sp,
                     fontWeight = FontWeight(400),
                     fontFamily = Font_Lato,
@@ -104,6 +107,6 @@ fun RoundsItem() {
 @Composable
 private fun Show() {
     FitFlexTheme {
-        RoundsItem()
+        RoundsItem(RoundsCard.Third)
     }
 }
