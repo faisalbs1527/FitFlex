@@ -21,9 +21,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.fitflex.components.PlanCard
 import com.example.fitflex.components.SubTitle
 import com.example.fitflex.components.WorkoutCardItem
+import com.example.fitflex.navigation.Screen
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.Font_LatoBold
@@ -32,13 +34,13 @@ import com.example.fitflex.utils.WorkoutCard
 import com.example.fitflex.utils.WorkoutToday
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    HomeScreenSkeleton()
+fun HomeScreen(navController: NavController) {
+    HomeScreenSkeleton(navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenSkeleton() {
+fun HomeScreenSkeleton(navController: NavController) {
 
     val cardList = listOf(
         WorkoutCard.First,
@@ -105,7 +107,10 @@ fun HomeScreenSkeleton() {
         SubTitle(text = "Popular Workouts")
         LazyRow(modifier = Modifier.padding(top = 16.dp)) {
             items(cardList) { item ->
-                WorkoutCardItem(workoutCard = item)
+                WorkoutCardItem(workoutCard = item,
+                    onClick = {
+                        navController.navigate(Screen.Workout.route)
+                    })
             }
         }
         SubTitle(text = "Today's Plan")
@@ -121,6 +126,6 @@ fun HomeScreenSkeleton() {
 @Composable
 private fun ShowHomeScreen() {
     FitFlexTheme {
-        HomeScreenSkeleton()
+//        HomeScreenSkeleton()
     }
 }
