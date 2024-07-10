@@ -1,6 +1,9 @@
 package com.example.fitflex.presentation.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.fitflex.components.PlanCard
 import com.example.fitflex.components.SubTitle
 import com.example.fitflex.components.WorkoutCardItem
@@ -34,13 +38,16 @@ import com.example.fitflex.utils.WorkoutCard
 import com.example.fitflex.utils.WorkoutToday
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    HomeScreenSkeleton(navController)
+fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
+    HomeScreenSkeleton(innerPadding, navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenSkeleton(navController: NavController) {
+fun HomeScreenSkeleton(
+    innerPadding: PaddingValues,
+    navController: NavController = rememberNavController()
+) {
 
     val cardList = listOf(
         WorkoutCard.First,
@@ -55,68 +62,73 @@ fun HomeScreenSkeleton(navController: NavController) {
         WorkoutToday.Third,
         WorkoutToday.Fourth
     )
-
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 20.dp)
+            .padding(innerPadding)
     ) {
-        Text(
-            text = "Good Morning \uD83D\uDD25",
-            fontSize = 14.sp,
-            fontWeight = FontWeight(600),
-            fontFamily = Font_Lato,
-            modifier = Modifier.padding(top = 30.dp)
-        )
-        Text(
-            text = "Faisal Ahammed",
-            fontSize = 24.sp,
-            fontWeight = FontWeight(800),
-            fontFamily = Font_LatoBold,
-            modifier = Modifier.padding(top = 4.dp)
-        )
-        SearchBar(
-            query = "",
-            onQueryChange = {},
-            onSearch = {},
-            active = false,
-            onActiveChange = {},
+        Column(
             modifier = Modifier
-                .padding(end = 20.dp, top = 16.dp)
-                .height(48.dp),
-            shape = RoundedCornerShape(12.dp),
-            placeholder = {
-                Text(
-                    text = "Search",
-                    fontSize = 14.sp,
-                    color = black80,
-                    fontFamily = Font_Lato,
-                    fontWeight = FontWeight(400)
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "",
-                    modifier = Modifier.size(24.dp),
-                    tint = black80
-                )
-            }) {
+                .fillMaxSize()
+                .padding(start = 20.dp)
+        ) {
+            Text(
+                text = "Good Morning \uD83D\uDD25",
+                fontSize = 14.sp,
+                fontWeight = FontWeight(600),
+                fontFamily = Font_Lato,
+                modifier = Modifier.padding(top = 30.dp)
+            )
+            Text(
+                text = "Faisal Ahammed",
+                fontSize = 24.sp,
+                fontWeight = FontWeight(800),
+                fontFamily = Font_LatoBold,
+                modifier = Modifier.padding(top = 4.dp)
+            )
+            SearchBar(
+                query = "",
+                onQueryChange = {},
+                onSearch = {},
+                active = false,
+                onActiveChange = {},
+                modifier = Modifier
+                    .padding(end = 20.dp, top = 16.dp)
+                    .height(48.dp),
+                shape = RoundedCornerShape(12.dp),
+                placeholder = {
+                    Text(
+                        text = "Search",
+                        fontSize = 14.sp,
+                        color = black80,
+                        fontFamily = Font_Lato,
+                        fontWeight = FontWeight(400)
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = "",
+                        modifier = Modifier.size(24.dp),
+                        tint = black80
+                    )
+                }) {
 
-        }
-        SubTitle(text = "Popular Workouts")
-        LazyRow(modifier = Modifier.padding(top = 16.dp)) {
-            items(cardList) { item ->
-                WorkoutCardItem(workoutCard = item,
-                    onClick = {
-                        navController.navigate(Screen.Workout.route)
-                    })
             }
-        }
-        SubTitle(text = "Today's Plan")
-        LazyColumn {
-            items(planList) { item ->
-                PlanCard(workoutToday = item)
+            SubTitle(text = "Popular Workouts")
+            LazyRow(modifier = Modifier.padding(top = 16.dp)) {
+                items(cardList) { item ->
+                    WorkoutCardItem(workoutCard = item,
+                        onClick = {
+                            navController.navigate(Screen.Workout.route)
+                        })
+                }
+            }
+            SubTitle(text = "Today's Plan")
+            LazyColumn {
+                items(planList) { item ->
+                    PlanCard(workoutToday = item)
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
@@ -47,12 +48,12 @@ import com.example.fitflex.utils.Challenges
 import com.example.fitflex.utils.Workouts
 
 @Composable
-fun ExploreScreen() {
-    ExploreScreenSkeleton()
+fun ExploreScreen(innerPadding: PaddingValues) {
+    ExploreScreenSkeleton(innerPadding)
 }
 
 @Composable
-fun ExploreScreenSkeleton() {
+fun ExploreScreenSkeleton(innerPadding: PaddingValues) {
 
     val bestList = listOf(
         Workouts.First,
@@ -76,104 +77,113 @@ fun ExploreScreenSkeleton() {
         Challenges.First
     )
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 30.dp, start = 20.dp)
+            .padding(innerPadding)
     ) {
+        items(1) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 30.dp, start = 20.dp)
+            ) {
 
-        Card(
-            modifier = Modifier
-                .height(180.dp)
-                .fillMaxWidth()
-                .padding(end = 20.dp),
-            shape = RoundedCornerShape(23.dp)
-        ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Image(
-                    painter = painterResource(id = R.drawable.quarantine),
-                    contentDescription = "Background Image",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.FillBounds
-                )
-                Box(
+                Card(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .drawBehind {
-                            drawRect(
-                                brush = Brush.horizontalGradient(
-                                    colors = listOf(
-                                        Color.Black.copy(alpha = 0.8f),// Adjust alpha for shadow intensity
-                                        transparentColor
-                                    )
-                                )
-                            )
-                        }
-                )
-                Column(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .fillMaxWidth(.7f),
-                    verticalArrangement = Arrangement.SpaceEvenly
+                        .height(180.dp)
+                        .fillMaxWidth()
+                        .padding(end = 20.dp),
+                    shape = RoundedCornerShape(23.dp)
                 ) {
-                    Text(
-                        text = "Best Quarantine Workout",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight(700),
-                        fontFamily = Font_LatoBold,
-                        color = Color.White,
-                        modifier = Modifier.padding(start = 26.dp)
-                    )
-                    Row(
-                        modifier = Modifier.padding(start = 26.dp),
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        Text(
-                            text = "See more",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight(700),
-                            fontFamily = Font_LatoBold,
-                            color = lightGreen
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Image(
+                            painter = painterResource(id = R.drawable.quarantine),
+                            contentDescription = "Background Image",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.FillBounds
                         )
-                        Icon(
-                            imageVector = Icons.Filled.ArrowForwardIos, contentDescription = "",
-                            tint = lightGreen,
+                        Box(
                             modifier = Modifier
-                                .padding(start = 4.dp)
-                                .size(14.dp)
+                                .fillMaxSize()
+                                .drawBehind {
+                                    drawRect(
+                                        brush = Brush.horizontalGradient(
+                                            colors = listOf(
+                                                Color.Black.copy(alpha = 0.8f),// Adjust alpha for shadow intensity
+                                                transparentColor
+                                            )
+                                        )
+                                    )
+                                }
                         )
+                        Column(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth(.7f),
+                            verticalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Text(
+                                text = "Best Quarantine Workout",
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight(700),
+                                fontFamily = Font_LatoBold,
+                                color = Color.White,
+                                modifier = Modifier.padding(start = 26.dp)
+                            )
+                            Row(
+                                modifier = Modifier.padding(start = 26.dp),
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                Text(
+                                    text = "See more",
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight(700),
+                                    fontFamily = Font_LatoBold,
+                                    color = lightGreen
+                                )
+                                Icon(
+                                    imageVector = Icons.Filled.ArrowForwardIos,
+                                    contentDescription = "",
+                                    tint = lightGreen,
+                                    modifier = Modifier
+                                        .padding(start = 4.dp)
+                                        .size(14.dp)
+                                )
+                            }
+                        }
                     }
                 }
-            }
-        }
-        SubTitle(text = "Best for you")
-        LazyHorizontalGrid(
-            rows = GridCells.Fixed(2),
-            modifier = Modifier.height(190.dp),
-            contentPadding = PaddingValues(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(bestList) {item->
-                WorkoutBox(item)
-            }
-        }
-        SubTitle(text = "Challenge")
-        LazyRow(
-            contentPadding = PaddingValues(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(challengeList){item->
-                ChallengeCard(item)
-            }
-        }
-        SubTitle(text = "Fast Warmup")
-        LazyRow(
-            contentPadding = PaddingValues(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(warmupList){item->
-                WorkoutBox(item)
+                SubTitle(text = "Best for you")
+                LazyHorizontalGrid(
+                    rows = GridCells.Fixed(2),
+                    modifier = Modifier.height(190.dp),
+                    contentPadding = PaddingValues(top = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(bestList) { item ->
+                        WorkoutBox(item)
+                    }
+                }
+                SubTitle(text = "Challenge")
+                LazyRow(
+                    contentPadding = PaddingValues(top = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(challengeList) { item ->
+                        ChallengeCard(item)
+                    }
+                }
+                SubTitle(text = "Fast Warmup")
+                LazyRow(
+                    contentPadding = PaddingValues(top = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(warmupList) { item ->
+                        WorkoutBox(item)
+                    }
+                }
             }
         }
     }
@@ -183,6 +193,6 @@ fun ExploreScreenSkeleton() {
 @Composable
 private fun ShowExploreScreen() {
     FitFlexTheme {
-        ExploreScreenSkeleton()
+//        ExploreScreenSkeleton()
     }
 }
