@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
@@ -41,6 +43,8 @@ import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.lightGreen
 import com.example.fitflex.ui.theme.transparentColor
+import com.example.fitflex.utils.Challenges
+import com.example.fitflex.utils.Workouts
 
 @Composable
 fun ExploreScreen() {
@@ -49,6 +53,29 @@ fun ExploreScreen() {
 
 @Composable
 fun ExploreScreenSkeleton() {
+
+    val bestList = listOf(
+        Workouts.First,
+        Workouts.Second,
+        Workouts.Third,
+        Workouts.Fourth,
+        Workouts.Fifth,
+        Workouts.Sixth
+    )
+    val warmupList = listOf(
+        Workouts.Fifth,
+        Workouts.Sixth,
+        Workouts.First,
+        Workouts.Third
+    )
+
+    val challengeList = listOf(
+        Challenges.First,
+        Challenges.Second,
+        Challenges.Third,
+        Challenges.First
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,26 +154,26 @@ fun ExploreScreenSkeleton() {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(10) {
-                WorkoutBox()
+            items(bestList) {item->
+                WorkoutBox(item)
             }
         }
         SubTitle(text = "Challenge")
         LazyRow(
             contentPadding = PaddingValues(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(4){
-                ChallengeCard()
+            items(challengeList){item->
+                ChallengeCard(item)
             }
         }
         SubTitle(text = "Fast Warmup")
         LazyRow(
             contentPadding = PaddingValues(top = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(4){
-                WorkoutBox()
+            items(warmupList){item->
+                WorkoutBox(item)
             }
         }
     }

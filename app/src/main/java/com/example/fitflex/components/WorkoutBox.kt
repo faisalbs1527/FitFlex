@@ -27,9 +27,12 @@ import com.example.fitflex.R
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.black
+import com.example.fitflex.utils.Workouts
 
 @Composable
-fun WorkoutBox() {
+fun WorkoutBox(
+    workouts: Workouts = Workouts.Second
+) {
     Card(
         modifier = Modifier
             .height(86.dp)
@@ -48,7 +51,7 @@ fun WorkoutBox() {
                     .size(72.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.bellyfat), contentDescription = "",
+                    painter = painterResource(id = workouts.image), contentDescription = "",
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.FillBounds
                 )
@@ -60,14 +63,14 @@ fun WorkoutBox() {
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Text(
-                    text = "Belly fat burner",
+                    text = workouts.title,
                     color = black,
                     fontWeight = FontWeight(600),
                     fontFamily = Font_Lato,
                     fontSize = 14.sp
                 )
-                TextBox(text = "10 min")
-                TextBox(text = "Beginner")
+                TextBox(text = workouts.workoutTime)
+                TextBox(text = workouts.status)
             }
         }
     }

@@ -27,19 +27,16 @@ import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.lightGreen
+import com.example.fitflex.utils.Challenges
 
 @Composable
 fun ChallengeCard(
-    containerColor: Color = lightGreen,
-    text: String = "Plank Challenge",
-    textColor: Color = black,
-    icon: Painter = painterResource(id = R.drawable.powericon),
-    iconColor: Color = Color.White.copy(.6f)
+    challenges: Challenges = Challenges.Second
 ) {
     Box(
         modifier = Modifier
             .size(110.dp)
-            .background(color = containerColor, shape = RoundedCornerShape(9.dp))
+            .background(color = challenges.containerColor, shape = RoundedCornerShape(9.dp))
     ) {
 
         Row(
@@ -48,10 +45,10 @@ fun ChallengeCard(
             horizontalArrangement = Arrangement.End
         ) {
             Icon(
-                painter = icon,
+                painter = painterResource(id = challenges.icon),
                 contentDescription = "",
                 modifier = Modifier.size(72.dp),
-                tint = iconColor
+                tint = challenges.iconColor
             )
         }
         Row(
@@ -64,8 +61,8 @@ fun ChallengeCard(
         )
         {
             Text(
-                text = text,
-                color = textColor,
+                text = challenges.text,
+                color = challenges.textColor,
                 fontWeight = FontWeight(600),
                 fontFamily = Font_Lato,
                 fontSize = 14.sp
