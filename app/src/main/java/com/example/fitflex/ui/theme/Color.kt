@@ -17,3 +17,4 @@ val transparentColor = Color(0x00FFFFFF) // Fully transparent white
 val semiTransparentColor = Color(0x80FF0000) // Semi-transparent red
 val almostOpaqueColor = Color(0xF0FFFFFF) // Almost opaque white
 val lightGreen = Color(0xFFBBF246)
+val textBoxColor = Color(0xFFF1F1F1)

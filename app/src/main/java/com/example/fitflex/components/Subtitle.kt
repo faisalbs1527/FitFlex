@@ -18,6 +18,6 @@ fun SubTitle(
         fontSize = 18.sp,
         fontWeight = FontWeight(700),
         fontFamily = Font_LatoBold,
-        modifier = Modifier.padding(top = 24.dp)
+        modifier = Modifier.padding(top = 16.dp)
     )
 }

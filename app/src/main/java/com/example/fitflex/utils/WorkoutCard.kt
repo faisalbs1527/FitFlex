@@ -36,3 +36,52 @@ sealed class WorkoutCard(
         workoutTime = "30 Min"
     )
 }
+
+sealed class Workouts(
+    val image: Int,
+    val title: String,
+    val status: String,
+    val workoutTime: String
+) {
+    data object First : Workouts(
+        image = R.drawable.bellyfat,
+        title = "Belly fat burner",
+        status = "Beginner",
+        workoutTime = "10 Min"
+    )
+
+    data object Second : Workouts(
+        image = R.drawable.plank,
+        title = "Plank",
+        status = "Expert",
+        workoutTime = "5 Min"
+    )
+
+    data object Third : Workouts(
+        image = R.drawable.losefat,
+        title = "Lose Fat",
+        status = "Beginner",
+        workoutTime = "50 Min"
+    )
+
+    data object Fourth : Workouts(
+        image = R.drawable.buildwhid,
+        title = "Build whider hand",
+        status = "Intermediate",
+        workoutTime = "30 Min"
+    )
+
+    data object Fifth : Workouts(
+        image = R.drawable.legexercise,
+        title = "Leg exercises",
+        status = "Beginner",
+        workoutTime = "10 Min"
+    )
+
+    data object Sixth : Workouts(
+        image = R.drawable.backward,
+        title = "Backward lunge",
+        status = "Beginner",
+        workoutTime = "5 Min"
+    )
+}
