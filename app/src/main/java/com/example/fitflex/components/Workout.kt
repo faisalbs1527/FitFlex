@@ -184,7 +184,7 @@ fun PlanCard(
         modifier = Modifier
             .padding(end = 16.dp, top = 8.dp, bottom = 8.dp)
             .height(120.dp)
-            .width(350.dp),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(23.dp),
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(1.dp)
