@@ -18,3 +18,8 @@ val semiTransparentColor = Color(0x80FF0000) // Semi-transparent red
 val almostOpaqueColor = Color(0xF0FFFFFF) // Almost opaque white
 val lightGreen = Color(0xFFBBF246)
 val textBoxColor = Color(0xFFF1F1F1)
+
+val Purple200 = Color(0xFFBB86FC)
+val Purple500 = Color(0xFFFFC107)
+val Purple700 = Color(0xFFFFEB3B)
+val Teal200 = Color(0xFF03DAC5)

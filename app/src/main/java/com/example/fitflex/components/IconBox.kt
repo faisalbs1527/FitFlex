@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fitflex.R
@@ -38,7 +39,11 @@ fun DetailsBox(
 ) {
     Row(
     ) {
-        IconBox(iconPainter = painterResource(id = image))
+        IconBox(
+            iconPainter = painterResource(id = image),
+            containerColor = lightGreen,
+            containerSize = 30.dp
+        )
         Column {
             Text(
                 text = title,
@@ -61,11 +66,13 @@ fun DetailsBox(
 
 @Composable
 fun IconBox(
-    iconPainter: Painter
+    iconPainter: Painter,
+    containerColor: Color,
+    containerSize:Dp
 ) {
     Card(
-        modifier = Modifier.size(30.dp),
-        colors = CardDefaults.cardColors(containerColor = lightGreen),
+        modifier = Modifier.size(containerSize),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
         shape = RoundedCornerShape(4.dp)
     ) {
         Column(

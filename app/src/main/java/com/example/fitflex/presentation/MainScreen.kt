@@ -1,5 +1,7 @@
 package com.example.fitflex.presentation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -14,6 +16,7 @@ import com.example.fitflex.presentation.home.HomeScreen
 import com.example.fitflex.presentation.profile.ProfileScreen
 import com.example.fitflex.utils.NavItems
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(
     navController: NavController,
