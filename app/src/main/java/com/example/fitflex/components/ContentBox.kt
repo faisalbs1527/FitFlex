@@ -27,8 +27,7 @@ import com.example.fitflex.ui.theme.black
 
 @Composable
 fun ContentBox(
-    height: Dp,
-    width: Dp,
+    modifier: Modifier = Modifier,
     color: Color,
     header: @Composable () -> Unit,
     content: @Composable () -> Unit
@@ -38,9 +37,7 @@ fun ContentBox(
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(
-            modifier = Modifier
-                .width(width)
-                .height(height)
+            modifier = modifier
                 .padding(start = 8.dp),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
@@ -55,8 +52,9 @@ fun ContentBox(
 private fun Show() {
     FitFlexTheme {
         ContentBox(
-            height = 132.dp,
-            width = 112.dp,
+            modifier = Modifier
+                .height(150.dp)
+                .width(120.dp),
             color = Color(0xFFFFE8C6),
             header = {
                 Row(

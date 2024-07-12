@@ -23,5 +23,15 @@ class CalendarDataSource {
         val monthYearString = currentDate.format(monthYear)
         return monthYearString
     }
+
+    fun findPosition():Int{
+        var position = 3
+
+        if (currentDate.dayOfMonth<4){
+            position = currentDate.dayOfMonth - 1
+        }
+
+        return position
+    }
 }
 

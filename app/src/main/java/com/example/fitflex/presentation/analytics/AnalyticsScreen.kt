@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -64,7 +63,8 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
 
     var selectedDate by remember { mutableStateOf(currentDate) }
 
-    val initialIndex = dates.indexOf(currentDate)
+
+    val initialIndex = dates.indexOf(currentDate.minusDays(dataSource.findPosition().toLong()))
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
 
 
@@ -107,27 +107,33 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(end = 20.dp),
+                    .padding(top = 20.dp, end = 20.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column(
+                    modifier = Modifier.fillMaxWidth(.33f),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    ContentBox(height = 70.dp, width = 112.dp, color = Color.White, header = {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text(
-                                text = "Active calories",
-                                fontSize = 13.sp,
-                                fontFamily = Font_Lato,
-                                fontWeight = FontWeight(500),
-                                color = black.copy(.5f)
-                            )
-                        }
-                    }) {
+                    ContentBox(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(70.dp),
+                        color = Color.White,
+                        header = {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = "Active calories",
+                                    fontSize = 13.sp,
+                                    fontFamily = Font_Lato,
+                                    fontWeight = FontWeight(500),
+                                    color = black.copy(.5f)
+                                )
+                            }
+                        }) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
@@ -143,7 +149,10 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
                     }
 
                     ContentBox(
-                        height = 132.dp, width = 112.dp, color = Color(0xFFEAECFF),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(132.dp),
+                        color = Color(0xFFEAECFF),
                         header = {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -164,14 +173,18 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
                     )
                 }
 
-                ContentBox(height = 218.dp, width = 222.dp, color = black, header = {
-                    Header(
-                        icon = R.drawable.ic_cycling,
-                        color = Color.White,
-                        text = "Cycling",
-                        textColor = Color.White
-                    )
-                }) {
+                ContentBox(
+                    modifier = Modifier
+                        .fillMaxWidth(.94f)
+                        .height(218.dp),
+                    color = black, header = {
+                        Header(
+                            icon = R.drawable.ic_cycling,
+                            color = Color.White,
+                            text = "Cycling",
+                            textColor = Color.White
+                        )
+                    }) {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -188,18 +201,22 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, end = 20.dp),
+                    .padding(top = 20.dp, end = 20.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ContentBox(height = 167.dp, width = 199.dp, color = Color(0xFFFFEBEB), header = {
-                    Header(
-                        icon = R.drawable.ic_heart,
-                        color = Color(0xFFF9B9B9),
-                        text = "Hearth Rate",
-                        textColor = black
-                    )
-                }) {
+                ContentBox(
+                    modifier = Modifier
+                        .fillMaxWidth(.55f)
+                        .height(167.dp),
+                    color = Color(0xFFFFEBEB), header = {
+                        Header(
+                            icon = R.drawable.ic_heart,
+                            color = Color(0xFFF9B9B9),
+                            text = "Heart Rate",
+                            textColor = black
+                        )
+                    }) {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -215,11 +232,13 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
                     }
                 }
                 Column(
+                    modifier = Modifier.fillMaxWidth(.9f),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     ContentBox(
-                        height = 100.dp,
-                        width = 135.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp),
                         color = Color(0xFFFFE8C6),
                         header = {
                             Header(
@@ -233,9 +252,8 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
                     }
                     Card(
                         modifier = Modifier
-                            .width(135.dp)
-                            .height(51.dp)
-                            .padding(top = 4.dp, end = 8.dp),
+                            .fillMaxWidth()
+                            .height(51.dp),
                         colors = CardDefaults.cardColors(containerColor = Color(0xFFF6CFCF))
                     ) {
                         Row(
@@ -256,18 +274,22 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
             }
             Row(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 20.dp, end = 20.dp),
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, end = 20.dp, bottom = 20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ContentBox(height = 128.dp, width = 178.dp, color = Color(0xFFEFE2FF), header = {
-                    Header(
-                        icon = R.drawable.ic_sleep,
-                        color = Color(0xFFD6BBF8),
-                        text = "Sleep",
-                        textColor = black
-                    )
-                }) {
+                ContentBox(
+                    modifier = Modifier
+                        .fillMaxWidth(.5f)
+                        .height(128.dp),
+                    color = Color(0xFFEFE2FF), header = {
+                        Header(
+                            icon = R.drawable.ic_sleep,
+                            color = Color(0xFFD6BBF8),
+                            text = "Sleep",
+                            textColor = black
+                        )
+                    }) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -280,14 +302,18 @@ fun AnalyticScreenSkeleton(padding: PaddingValues) {
                         )
                     }
                 }
-                ContentBox(height = 128.dp, width = 156.dp, color = Color(0xFFD8E6EC), header = {
-                    Header(
-                        icon = R.drawable.ic_water,
-                        color = Color(0xFF95CCE3),
-                        text = "Water",
-                        textColor = black
-                    )
-                }) {
+                ContentBox(
+                    modifier = Modifier
+                        .fillMaxWidth(.9f)
+                        .height(128.dp),
+                    color = Color(0xFFD8E6EC), header = {
+                        Header(
+                            icon = R.drawable.ic_water,
+                            color = Color(0xFF95CCE3),
+                            text = "Water",
+                            textColor = black
+                        )
+                    }) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
