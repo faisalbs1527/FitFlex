@@ -199,6 +199,6 @@ fun ExploreScreenSkeleton(innerPadding: PaddingValues) {
 @Composable
 private fun ShowExploreScreen() {
     FitFlexTheme {
-//        ExploreScreenSkeleton()
+        ExploreScreenSkeleton(PaddingValues(0.dp))
     }
 }
