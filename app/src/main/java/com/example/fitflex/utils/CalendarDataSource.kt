@@ -1,4 +1,4 @@
-package com.example.fitflex.model
+package com.example.fitflex.utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi

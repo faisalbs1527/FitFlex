@@ -1,5 +1,6 @@
 package com.example.fitflex.presentation
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Scaffold
@@ -7,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.example.fitflex.components.NavBar
 import com.example.fitflex.components.NavBarItem
 import com.example.fitflex.navigation.Screen
@@ -16,6 +18,7 @@ import com.example.fitflex.presentation.home.HomeScreen
 import com.example.fitflex.presentation.profile.ProfileScreen
 import com.example.fitflex.utils.NavItems
 
+@SuppressLint("RestrictedApi")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(
@@ -39,7 +42,9 @@ fun MainScreen(
                     NavBarItem(
                         onClick = {
                             selectedIndex.value = it.no
-                            navController.navigate(it.route)
+                            navController.navigate(it.route) {
+                                navController.popBackStack()
+                            }
                         },
                         navItems = it,
                         selected = selectedIndex.value == it.no
@@ -55,7 +60,7 @@ fun MainScreen(
             )
 
             Screen.Explore.route -> ExploreScreen(innerPadding)
-            Screen.Analytics.route -> AnalyticsScreen()
+            Screen.Analytics.route -> AnalyticsScreen(innerPadding)
             Screen.Profile.route -> ProfileScreen()
             else -> HomeScreen(
                 navController = navController,
