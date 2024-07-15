@@ -1,7 +1,9 @@
 package com.example.fitflex.presentation.workout.play
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +17,19 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,6 +47,8 @@ import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.gray
 import com.example.fitflex.ui.theme.lightGreen
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun PlayWorkoutScreen() {
@@ -45,6 +57,24 @@ fun PlayWorkoutScreen() {
 
 @Composable
 fun PlayWorkoutScreenSkeleton() {
+
+    var isRunning by remember {
+        mutableStateOf(false)
+    }
+    var currSeconds by remember {
+        mutableIntStateOf(value = 500)
+    }
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(isRunning) {
+        if (isRunning) {
+            while (true) {
+                delay(1000)
+                currSeconds++
+            }
+        }
+    }
+
     Column(
         modifier = Modifier
             .padding()
@@ -112,7 +142,7 @@ fun PlayWorkoutScreenSkeleton() {
                 modifier = Modifier.padding(top = 20.dp)
             )
             Text(
-                text = "12:56",
+                text = formatTime(currSeconds),
                 fontSize = 40.sp,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight(800),
@@ -133,11 +163,17 @@ fun PlayWorkoutScreenSkeleton() {
                         .background(
                             color = lightGreen,
                             shape = CircleShape
-                        ),
+                        )
+                        .clickable {
+                            scope.launch {
+                                isRunning = !isRunning
+                            }
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.PlayArrow, contentDescription = "",
+                        imageVector = if (isRunning) Icons.Filled.Pause else Icons.Filled.PlayArrow,
+                        contentDescription = "",
                         tint = black
                     )
                 }
@@ -155,6 +191,13 @@ private fun ShowPlayWorkoutScreen() {
     FitFlexTheme {
         PlayWorkoutScreenSkeleton()
     }
+}
+
+@SuppressLint("DefaultLocale")
+fun formatTime(seconds: Int): String {
+    val minutes = seconds / 60
+    val remainingSeconds = seconds % 60
+    return String.format("%02d:%02d", minutes, remainingSeconds)
 }
 
 @Composable
