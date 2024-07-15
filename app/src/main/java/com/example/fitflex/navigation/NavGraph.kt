@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.fitflex.presentation.MainScreen
 import com.example.fitflex.presentation.onBoarding.OnBoardingScreen
-import com.example.fitflex.presentation.workout.WorkoutScreen
+import com.example.fitflex.presentation.workout.category.WorkoutScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @RequiresApi(Build.VERSION_CODES.O)

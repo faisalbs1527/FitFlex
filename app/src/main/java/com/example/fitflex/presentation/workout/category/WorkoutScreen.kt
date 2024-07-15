@@ -1,4 +1,4 @@
-package com.example.fitflex.presentation.workout
+package com.example.fitflex.presentation.workout.category
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
