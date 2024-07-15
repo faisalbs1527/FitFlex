@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fitflex.R
+import com.example.fitflex.domain.model.WorkoutEntity
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.Font_LatoBold
@@ -45,7 +46,6 @@ import com.example.fitflex.ui.theme.black
 import com.example.fitflex.ui.theme.lightGreen
 import com.example.fitflex.ui.theme.transparentColor
 import com.example.fitflex.utils.WorkoutCard
-import com.example.fitflex.utils.WorkoutToday
 
 @Composable
 fun WorkoutCardItem(
@@ -178,7 +178,7 @@ fun CardItem(
 
 @Composable
 fun PlanCard(
-    workoutToday: WorkoutToday
+    workoutToday: WorkoutEntity
 ) {
     Card(
         modifier = Modifier
@@ -220,7 +220,7 @@ fun PlanCard(
                         )
                     ) {
                         Text(
-                            text = workoutToday.status,
+                            text = workoutToday.level,
                             color = Color.White,
                             fontWeight = FontWeight(400),
                             fontSize = 10.sp,
@@ -233,20 +233,20 @@ fun PlanCard(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Text(
-                        text = workoutToday.title,
+                        text = workoutToday.name,
                         color = black,
                         fontWeight = FontWeight(500),
                         fontSize = 16.sp,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
                     Text(
-                        text = workoutToday.amount,
+                        text ="${workoutToday.amount} + ${workoutToday.name} in a day",
                         color = Color.Black.copy(alpha = .5f),
                         fontWeight = FontWeight(400),
                         fontSize = 13.sp,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
-                    RoundedProgressBar(progress = workoutToday.progress)
+                    RoundedProgressBar(progress = .7f)
                 }
             }
         }
@@ -281,7 +281,7 @@ private fun ShowCardItem() {
 @Composable
 private fun ShowPlanCard() {
     FitFlexTheme {
-        PlanCard(workoutToday = WorkoutToday.Fourth)
+//        PlanCard(workoutToday = WorkoutEntity())
     }
 }
 

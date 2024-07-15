@@ -1,6 +1,5 @@
 package com.example.fitflex.presentation.home
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -19,11 +18,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitflex.components.PlanCard
@@ -35,7 +39,6 @@ import com.example.fitflex.ui.theme.Font_Lato
 import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black80
 import com.example.fitflex.utils.WorkoutCard
-import com.example.fitflex.utils.WorkoutToday
 
 @Composable
 fun HomeScreen(innerPadding: PaddingValues, navController: NavController) {
@@ -49,6 +52,8 @@ fun HomeScreenSkeleton(
     navController: NavController = rememberNavController()
 ) {
 
+    val viewModel: HomeViewModel = hiltViewModel()
+
     val cardList = listOf(
         WorkoutCard.First,
         WorkoutCard.Second,
@@ -56,12 +61,8 @@ fun HomeScreenSkeleton(
         WorkoutCard.Fourth
     )
 
-    val planList = listOf(
-        WorkoutToday.First,
-        WorkoutToday.Second,
-        WorkoutToday.Third,
-        WorkoutToday.Fourth
-    )
+    val workoutList by viewModel.workoutList.collectAsState()
+    println(workoutList)
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -125,8 +126,11 @@ fun HomeScreenSkeleton(
                 }
             }
             SubTitle(text = "Today's Plan")
+            LaunchedEffect(key1 = Unit) {
+                viewModel.getWorkouts()
+            }
             LazyColumn {
-                items(planList) { item ->
+                items(workoutList) { item ->
                     PlanCard(workoutToday = item)
                 }
             }
