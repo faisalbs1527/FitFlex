@@ -178,13 +178,17 @@ fun CardItem(
 
 @Composable
 fun PlanCard(
-    workoutToday: WorkoutEntity
+    workoutToday: WorkoutEntity,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(end = 16.dp, top = 8.dp, bottom = 8.dp)
             .height(120.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onClick()
+            },
         shape = RoundedCornerShape(23.dp),
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(1.dp)
@@ -240,13 +244,18 @@ fun PlanCard(
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
                     Text(
-                        text ="${workoutToday.amount} + ${workoutToday.name} in a day",
+                        text = (if (workoutToday.amount == 0) "${workoutToday.duration / 60} Min "
+                        else "${workoutToday.amount}") + "${workoutToday.name} in a day",
                         color = Color.Black.copy(alpha = .5f),
                         fontWeight = FontWeight(400),
                         fontSize = 13.sp,
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
-                    RoundedProgressBar(progress = .7f)
+                    RoundedProgressBar(
+                        progress = if (workoutToday.duration == 0) (workoutToday.amount - workoutToday.remAmount).toFloat() / workoutToday.amount
+                        else (workoutToday.duration - workoutToday.remDuration).toFloat() / workoutToday.duration
+                    )
+
                 }
             }
         }

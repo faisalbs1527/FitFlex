@@ -6,4 +6,6 @@ interface WorkoutRepository {
 
     suspend fun insertDummyData(workoutEntity: WorkoutEntity)
     suspend fun getWorkouts(): List<WorkoutEntity>
+    suspend fun getWorkoutById(id: Int): WorkoutEntity
+    suspend fun updateWorkout(workoutEntity: WorkoutEntity)
 }

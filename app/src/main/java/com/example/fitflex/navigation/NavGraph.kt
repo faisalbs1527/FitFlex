@@ -7,11 +7,14 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.fitflex.presentation.MainScreen
 import com.example.fitflex.presentation.onBoarding.OnBoardingScreen
 import com.example.fitflex.presentation.workout.category.WorkoutScreen
+import com.example.fitflex.presentation.workout.play.PlayWorkoutScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @RequiresApi(Build.VERSION_CODES.O)
@@ -82,6 +85,15 @@ fun SetupNavGraph(
             }
         ) {
             MainScreen(navController = navController, selectedItem = 3)
+        }
+
+        composable(
+            route = Screen.PlayWorkout.route,
+            arguments = listOf(navArgument(name = "workoutId") {
+                type = NavType.IntType
+            })
+        ) {
+            PlayWorkoutScreen(navController = navController,workoutId = it.arguments?.getInt("workoutId")!!)
         }
     }
 }

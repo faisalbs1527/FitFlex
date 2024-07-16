@@ -62,7 +62,6 @@ fun HomeScreenSkeleton(
     )
 
     val workoutList by viewModel.workoutList.collectAsState()
-    println(workoutList)
     Row(
         modifier = Modifier
             .fillMaxSize()
@@ -131,7 +130,9 @@ fun HomeScreenSkeleton(
             }
             LazyColumn {
                 items(workoutList) { item ->
-                    PlanCard(workoutToday = item)
+                    PlanCard(workoutToday = item){
+                        navController.navigate(Screen.PlayWorkout.createRoute(item.id))
+                    }
                 }
             }
         }

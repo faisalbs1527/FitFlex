@@ -8,4 +8,7 @@ sealed class Screen(val route: String) {
     object Explore : Screen(route = "ExploreScreen")
     object Analytics : Screen(route = "AnalyticsScreen")
     object Profile : Screen(route = "ProfileScreen")
+    object PlayWorkout : Screen(route = "PlayWorkoutScreen/{workoutId}") {
+        fun createRoute(id: Int) = route.replaceFirst("{workoutId}", "$id")
+    }
 }

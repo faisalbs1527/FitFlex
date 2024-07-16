@@ -19,6 +19,7 @@ class FitFlex : Application() {
             DummyData.Second,
             DummyData.Third,
             DummyData.Fourth,
+            DummyData.Fifth
         )
         val repository: WorkoutRepository = WorkoutRepositoryImpl(AppDatabase.invoke(this))
         CoroutineScope(Dispatchers.IO).launch {

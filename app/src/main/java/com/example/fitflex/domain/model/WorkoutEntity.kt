@@ -11,8 +11,9 @@ data class WorkoutEntity(
     val description: String,
     val image: Int,
     val level: String,
+    val burn: String,
     val duration: Int,
-    val remDuration: Int,
+    var remDuration: Int,
     val amount: Int,
-    val remAmount: Int
+    var remAmount: Int
 )

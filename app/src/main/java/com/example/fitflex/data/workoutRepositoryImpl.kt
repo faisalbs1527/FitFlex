@@ -13,6 +13,14 @@ class WorkoutRepositoryImpl @Inject constructor(
         return@withContext db.workoutDao().getWorkouts()
     }
 
+    override suspend fun getWorkoutById(id: Int): WorkoutEntity = withContext(Dispatchers.IO) {
+        return@withContext db.workoutDao().getWorkoutById(id)
+    }
+
+    override suspend fun updateWorkout(workoutEntity: WorkoutEntity) {
+        db.workoutDao().updateWorkout(workoutEntity)
+    }
+
     override suspend fun insertDummyData(workoutEntity: WorkoutEntity) =
         withContext(Dispatchers.IO) {
             db.workoutDao().insert(workoutEntity)

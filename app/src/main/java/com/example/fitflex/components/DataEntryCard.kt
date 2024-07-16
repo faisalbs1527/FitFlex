@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fitflex.presentation.workout.play.PlayWorkoutViewModel
 import com.example.fitflex.ui.theme.FitFlexTheme
 import com.example.fitflex.ui.theme.Font_LatoBold
 import com.example.fitflex.ui.theme.black
@@ -48,8 +49,10 @@ import com.example.fitflex.ui.theme.lightGreen
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun DataEntryCard(
+    viewModel: PlayWorkoutViewModel,
     isTimer: Boolean = false,
     amountData: String = "30",
     remaining: String = "15",
@@ -69,7 +72,7 @@ fun DataEntryCard(
         if (isRunning) {
             while (true) {
                 delay(1000)
-                currSeconds++
+                currSeconds--
             }
         }
     }
@@ -79,9 +82,12 @@ fun DataEntryCard(
         mutableIntStateOf(remaining.toInt())
     }
 
+    viewModel._remainingTime.value = currSeconds
+    viewModel._remainingAmount.value = remAmount
+
     Column(
         modifier = Modifier
-            .padding(top = 40.dp, start = 20.dp, end = 20.dp)
+            .padding(top = 40.dp, start = 20.dp, end = 20.dp, bottom = 20.dp)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -164,12 +170,12 @@ private fun Show() {
         val burn = "60 Cal"
         val remaining = "15"
 
-        DataEntryCard(
-            isTimer = true,
-            amountData = amountData,
-            remaining = remaining,
-            burn = burn
-        )
+//        DataEntryCard(
+//            isTimer = true,
+//            amountData = amountData,
+//            remaining = remaining,
+//            burn = burn
+//        )
     }
 }
 
