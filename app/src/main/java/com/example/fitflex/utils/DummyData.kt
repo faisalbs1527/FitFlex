@@ -11,8 +11,10 @@ object DummyData {
         description = "",
         image = R.drawable.pushup,
         level = "Intermediate",
-        duration = "",
-        amount = 100
+        duration = 0,
+        remDuration = 0,
+        amount = 60,
+        remAmount = 50
     )
 
     val Second = WorkoutEntity(
@@ -21,8 +23,10 @@ object DummyData {
         description = "",
         image = R.drawable.situp,
         level = "Beginner",
-        duration = "",
-        amount = 20
+        duration = 0,
+        remDuration = 0,
+        amount = 100,
+        remAmount = 90
     )
 
     val Third = WorkoutEntity(
@@ -31,8 +35,10 @@ object DummyData {
         description = "",
         image = R.drawable.kneepushup,
         level = "Beginner",
-        duration = "",
-        amount = 30
+        duration = 0,
+        remDuration = 0,
+        amount = 50,
+        remAmount = 30
     )
 
     val Fourth = WorkoutEntity(
@@ -41,8 +47,10 @@ object DummyData {
         description = "",
         image = R.drawable.jumpingjack,
         level = "Beginner",
-        duration = "",
-        amount = 60
+        duration = 0,
+        remDuration = 0,
+        amount = 50,
+        remAmount = 40
     )
 
 }
