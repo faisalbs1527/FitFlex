@@ -61,6 +61,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.core)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.room.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -84,4 +87,16 @@ dependencies {
     // Pager and Indicators - Accompanist
     implementation ("com.google.accompanist:accompanist-pager:0.24.2-alpha")
     implementation ("com.google.accompanist:accompanist-pager-indicators:0.24.2-alpha")
+
+    //icon
+    implementation ("androidx.compose.material:material-icons-extended:1.5.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:2.6.1")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.6.1")
+
 }
