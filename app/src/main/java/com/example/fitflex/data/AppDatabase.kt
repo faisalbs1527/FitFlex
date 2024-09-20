@@ -4,8 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.fitflex.data.dao.WorkoutDao
 import com.example.fitflex.domain.model.WorkoutEntity
+import com.example.fitflex.utils.DummyData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Database(
     entities = [WorkoutEntity::class],
@@ -22,7 +27,23 @@ abstract class AppDatabase : RoomDatabase() {
                 context.applicationContext,
                 AppDatabase::class.java,
                 "FitFlex.db"
-            ).build()
+            ).addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    val dummyData = listOf(
+                        DummyData.First,
+                        DummyData.Second,
+                        DummyData.Third,
+                        DummyData.Fourth,
+                        DummyData.Fifth
+                    )
+                    CoroutineScope(Dispatchers.IO).launch {
+                        dummyData.forEach { data ->
+                            invoke(context).workoutDao().insert(data)
+                        }
+                    }
+                }
+            }).build()
         }
     }
 }

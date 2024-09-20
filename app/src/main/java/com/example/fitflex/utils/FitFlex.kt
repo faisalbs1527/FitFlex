@@ -11,21 +11,22 @@ import kotlinx.coroutines.launch
 
 @HiltAndroidApp
 class FitFlex : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        val dummyData = listOf(
-            DummyData.First,
-            DummyData.Second,
-            DummyData.Third,
-            DummyData.Fourth,
-            DummyData.Fifth
-        )
-        val repository: WorkoutRepository = WorkoutRepositoryImpl(AppDatabase.invoke(this))
-        CoroutineScope(Dispatchers.IO).launch {
-            dummyData.forEach { data ->
-                repository.insertDummyData(data)
-            }
-        }
-    }
+//    override fun onCreate() {
+//        super.onCreate()
+//
+//        val dummyData = listOf(
+//            DummyData.First,
+//            DummyData.Second,
+//            DummyData.Third,
+//            DummyData.Fourth,
+//            DummyData.Fifth
+//        )
+//        val repository: WorkoutRepository = WorkoutRepositoryImpl(AppDatabase.invoke(this))
+//        CoroutineScope(Dispatchers.IO).launch {
+//            dummyData.forEach { data ->
+//                println(data)
+//                repository.insertDummyData(data)
+//            }
+//        }
+//    }
 }
